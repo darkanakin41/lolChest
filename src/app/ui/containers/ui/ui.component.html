@@ -1,5 +1,5 @@
-<header class="fixed-top">
-  <app-header #header></app-header>
+<header class="container">
+  <app-header #header class="row d-flex justify-content-center"></app-header>
 </header>
 
 <main [ngClass]="{'close-aside': !header.open}">
@@ -9,7 +9,7 @@
 
   <aside>
     <div class="scroller">
-      <app-nav></app-nav>
+<!--      <app-nav></app-nav>-->
     </div>
   </aside>
 

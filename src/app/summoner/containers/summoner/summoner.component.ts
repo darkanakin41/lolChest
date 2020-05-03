@@ -23,6 +23,7 @@ export class SummonerComponent implements OnInit {
   searchChamp;
   chestValue = '';
   roleValue = '';
+  roleIconValue = '';
   property = 'championName';
   propertyValue = 'asc';
   chestOptions = [
@@ -41,6 +42,7 @@ export class SummonerComponent implements OnInit {
     {value: 'MID', viewValue: 'MID'},
     {value: 'ADC', viewValue: 'ADC'},
     {value: 'SUPPORT', viewValue: 'SUPPORT'},
+    {value: '', viewValue: 'ALL'},
   ];
   rolesIcons = [
     {value: 'TOP', viewValue: 'Position_Bronze-Top'},
@@ -48,6 +50,7 @@ export class SummonerComponent implements OnInit {
     {value: 'MID', viewValue: 'Position_Bronze-Mid'},
     {value: 'ADC', viewValue: 'Position_Bronze-Bot'},
     {value: 'SUPPORT', viewValue: 'Position_Bronze-Support'},
+    {value: '', viewValue: 'Position_All'},
   ];
   regions = [
     {value: 'euw1', viewValue: 'EUW1'},
@@ -70,7 +73,7 @@ export class SummonerComponent implements OnInit {
   }
 
   region = 'euw1';
-  value = 'Guisharko';
+  value = '';
 
   getSummonersChampions() {
     this.summonerService.getSummoner(this.value.replace(' ', '+')).subscribe(summoner => {

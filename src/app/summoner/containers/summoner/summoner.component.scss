@@ -1,9 +1,11 @@
 .search {
   height: 38px;
 }
-
-label {
-  vertical-align: -webkit-baseline-middle;
+.league-img{
+  max-width: 150px;
+}
+.icon-img{
+  max-width: 200px;
 }
 
 .col-xs-6 {
@@ -36,7 +38,4 @@ label {
 .champ {
   object-fit: cover;
   width: 170px;
-}
-.max-champ{
-  max-height: 250px;
 }
