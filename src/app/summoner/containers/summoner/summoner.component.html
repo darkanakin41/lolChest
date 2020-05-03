@@ -1,0 +1,248 @@
+<div class="container summoner">
+  <form class="form-inline md-form mr-auto mb-4">
+    <input class="form-control mr-sm-2" type="text" #box placeholder="Nom du joueur" aria-label="Search">
+    <button mdbBtn size="sm" outline="true" rounded="true" class="btn btn-outline-dark search"
+            (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
+  </form>
+  <div *ngIf="summoner">
+    <img src="../../../../assets/lol/splash/{{champions[0].championImage}}" alt="champion splash" class="responsive">
+    <img src="../../../../assets/lol/profileicon/{{summoner.profileIconId}}.png" alt="profile icon"
+         class="responsive max-champ">
+    <p>{{summoner.name}}</p>
+    <p>Lvl {{summoner.summonerLevel}}</p>
+    <div class="row">
+      <div class="col-md-4  col-xs-6"
+           *ngFor="let league of leagues">
+        <div class="text-center">
+          <img src="../../../../assets/lol/ranked-emblems/{{league.tier}}.png"
+               alt="{{league.tier}}" class="league">
+          <div class="info text-center">
+            <h3>{{league.queueType}}</h3>
+            <h4>{{league.tier}} {{league.rank}}</h4>
+            <p>{{league.leaguePoints}} LP</p>
+            <p><b>W / L :</b> {{league.wins}} / {{league.losses}}  </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4  col-xs-6" *ngFor="let tft of tfts">
+        <div class="text-center">
+          <img src="../../../../assets/lol/ranked-emblems/{{tft.tier}}.png"
+               alt="{{tft.tier}}" class="league">
+          <div class="info text-center">
+            <h3>{{tft.queueType}}</h3>
+            <h4>{{tft.tier}} {{tft.rank}}</h4>
+            <p>{{tft.leaguePoints}} LP</p>
+            <p><b>W / L :</b> {{tft.wins}} / {{tft.losses}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>Most chances to get chest with :</p>
+    <div class="md-form mt-2 mb-2 col-lg-2 col-md-2" *ngFor="let roleIcon of rolesIcons" [(ngModel)]="roleValue">
+      <label class="form-check-label" for="inline{{roleIcon.viewValue}}"><img src="../../../../assets/lol/ranked-positions/{{roleIcon.viewValue}}.png" alt="{{roleIcon.viewValue}}" class=""></label>
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inline{{roleIcon.viewValue}}" [value]="roleIcon.value" value="{{roleIcon.value}}">
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-4 col-lg-2 col-xs-6"
+           *ngFor="let champion of champions | filter:'false' |slice:0:6">
+        <div class="card-champ text-center">
+          <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+               alt="{{champion.championName}}" class="champ">
+          <div class="info">
+            <h3>{{champion.championName}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>Most chances by role :</p>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingTop">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTop" aria-expanded="false"
+                    aria-controls="collapseTop">
+              <img src="../../../../assets/lol/ranked-positions/Position_Bronze-Top.png" alt="icon" class="">
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTop" class="collapse show" aria-labelledby="headingTop" data-parent="#accordion">
+          <div class="card-body row">
+            <div class="col-md-4 col-lg-2 col-xs-6"
+                 *ngFor="let champion of champions | filter:'false' |filter:'TOP' |slice:0:6">
+              <div class="card-champ text-center">
+                <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+                     alt="{{champion.championName}}" class="champ">
+                <div class="info">
+                  <h3>{{champion.championName}}</h3>
+                  <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+                       class="centered">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingJungle">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseJungle" aria-expanded="false"
+                    aria-controls="collapseOne">
+              <img src="../../../../assets/lol/ranked-positions/Position_Bronze-Jungle.png" alt="icon" class="">
+            </button>
+          </h5>
+        </div>
+        <div id="collapseJungle" class="collapse show" aria-labelledby="headingJungle" data-parent="#accordion">
+          <div class="card-body row">
+            <div class="col-md-4 col-lg-2 col-xs-6"
+                 *ngFor="let champion of champions | filter:'false' |filter:'JUNGLE' |slice:0:6">
+              <div class="card-champ text-center">
+                <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+                     alt="{{champion.championName}}" class="champ">
+                <div class="info">
+                  <h3>{{champion.championName}}</h3>
+                  <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+                       class="centered">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingMid">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseMid" aria-expanded="false"
+                    aria-controls="collapseMid">
+              <img src="../../../../assets/lol/ranked-positions/Position_Bronze-Mid.png" alt="icon" class="">
+            </button>
+          </h5>
+        </div>
+        <div id="collapseMid" class="collapse show" aria-labelledby="headingMid" data-parent="#accordion">
+          <div class="card-body row">
+            <div class="col-md-4 col-lg-2 col-xs-6"
+                 *ngFor="let champion of champions | filter:'false' |filter:'MID' |slice:0:6">
+              <div class="card-champ text-center">
+                <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+                     alt="{{champion.championName}}" class="champ">
+                <div class="info">
+                  <h3>{{champion.championName}}</h3>
+                  <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+                       class="centered">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingAdc">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseAdc" aria-expanded="false"
+                    aria-controls="collapseAdc">
+              <img src="../../../../assets/lol/ranked-positions/Position_Bronze-Bot.png" alt="icon" class="">
+            </button>
+          </h5>
+        </div>
+        <div id="collapseAdc" class="collapse show" aria-labelledby="headingAdc" data-parent="#accordion">
+          <div class="card-body row">
+            <div class="col-md-4 col-lg-2 col-xs-6"
+                 *ngFor="let champion of champions | filter:'false' |filter:'ADC' |slice:0:6">
+              <div class="card-champ text-center">
+                <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+                     alt="{{champion.championName}}" class="champ">
+                <div class="info">
+                  <h3>{{champion.championName}}</h3>
+                  <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+                       class="centered">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" id="headingSupport">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSupport" aria-expanded="false"
+                    aria-controls="collapseSupport">
+              <img src="../../../../assets/lol/ranked-positions/Position_Bronze-Support.png" alt="icon" class="">
+            </button>
+          </h5>
+        </div>
+        <div id="collapseSupport" class="collapse show" aria-labelledby="headingSupport" data-parent="#accordion">
+          <div class="card-body row">
+            <div class="col-md-4 col-lg-2 col-xs-6"
+                 *ngFor="let champion of champions | filter:'false' |filter:'SUPPORT' |slice:0:6">
+              <div class="card-champ text-center">
+                <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+                     alt="{{champion.championName}}" class="champ">
+                <div class="info">
+                  <h3>{{champion.championName}}</h3>
+                  <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+                       class="centered">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="md-form mt-2 mb-2 col-lg-3 col-md-6">
+        <label for="searchChamp" class="">Champion</label>
+        <input mdbInput type="text" name="text" [(ngModel)]="searchChamp" id="searchChamp" class="form-control">
+      </div>
+      <div class="md-form mt-2 mb-2 col-lg-2 col-md-6">
+        <label for="role" class="">Role</label>
+        <select id="role" class="browser-default custom-select" [(ngModel)]="roleValue">
+          <option *ngFor="let role of roles" [value]="role.value">
+            {{role.viewValue}}
+          </option>
+        </select>
+      </div>
+      <div class="md-form mt-2 mb-2 col-lg-2 col-md-6">
+        <label for="chest" class="">Chest</label>
+        <select id="chest" class="browser-default custom-select" [(ngModel)]="chestValue">
+          <option *ngFor="let chestOption of chestOptions" [value]="chestOption.value">
+            {{chestOption.viewValue}}
+          </option>
+        </select>
+      </div>
+      <div class="md-form mt-2 mb-2 col-lg-3 col-md-6">
+        <label for="orderyBy" class="">Order</label>
+        <select id="orderyBy" class="browser-default custom-select" [(ngModel)]="property">
+          <option *ngFor="let orderyByOption of orderyByOptions" [value]="orderyByOption.value">
+            {{orderyByOption.viewValue}}
+          </option>
+        </select>
+      </div>
+      <div class="md-form mt-2 mb-2 col-lg-1 col-md-3">
+        <label for="orderyByValue" class="">By</label>
+        <select id="orderyByValue" class="browser-default custom-select" [(ngModel)]="propertyValue">
+          <option value='asc'>Asc</option>
+          <option value='desc'>Desc</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-lg-2 col-xs-6"
+         *ngFor="let champion of champions | filter:searchChamp |filter:chestValue|orderBy:propertyValue:property| filter:roleValue ">
+      <div class="card-champ text-center">
+        <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+             alt="{{champion.championName}}" class="champ">
+        <div class="info">
+          <h3>{{champion.championName}}</h3>
+          <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
+               class="centered">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

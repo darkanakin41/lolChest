@@ -1,0 +1,36 @@
+<div class="container summoner">
+  <form class="form-inline md-form mr-auto mb-4">
+    <input class="form-control mr-sm-2" type="text" #box placeholder="Nom du joueur" aria-label="Search">
+    <button mdbBtn size="sm" outline="true" rounded="true" class="btn btn-outline-dark search"
+            (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
+  </form>
+  <div class="row">
+    <div class="col-12">
+      {{ currentMatch.gameMode}}
+    </div>
+    <div class="row">
+      <div class="card-champ participants" *ngFor="let participant of currentMatch.participants">
+        <div *ngIf="participant.teamId == '100'" class="col-md-2">
+          <img src="../../../../assets/lol/loading/{{participant.championImage}}"
+               alt="{{participant.championName}}" class="champ">
+          <div class="info">
+            <h3>{{participant.summonerName}}</h3>
+            <h4>{{participant.chest}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card-champ participants" *ngFor="let participant of currentMatch.participants" >
+        <div *ngIf="participant.teamId == '200'" class="col-md-2">
+          <img src="../../../../assets/lol/loading/{{participant.championImage}}"
+               alt="{{participant.championName}}" class="champ">
+          <div class="info">
+            <h3>{{participant.summonerName}}</h3>
+            <h4>{{participant.chest}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

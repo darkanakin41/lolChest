@@ -1,0 +1,18 @@
+<!--    <ul class="nav flex-column purple-gradient py-4 mb-r font-weight-bold z-depth-1">-->
+<!--      <li class="nav-item">-->
+<!--      </li>-->
+<!--    </ul>-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/">LOL CHEST</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <nav class="navbar navbar-light bg-dark">
+      <a [routerLink]="['/summoner']" class="nav-link white-text" routerLinkActive="router-link-active">Summoner</a>
+      <a [routerLink]="['/summoner/current_match']" class="nav-link white-text" routerLinkActive="router-link-active">Current Match</a>
+    </nav>
+  </div>
+</nav>
