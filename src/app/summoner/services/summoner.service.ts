@@ -10,6 +10,7 @@ const httpOptions = {
     'content-type': 'application/json'
   })
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +35,7 @@ export class SummonerService {
   }
 
   public getSummoner(url: string = '', optionalParam?: HttpParams) {
-
+    const httpheaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
     let httparams = new HttpParams()
       .set('api_key', this.apikey);
 
@@ -43,9 +44,14 @@ export class SummonerService {
         httparams = httparams.set(key, optionalParam.get(key));
       });
     }
-
-
-    return this.http.get<any>(this.baseUrl + this.urlSummonerName + url, {params: httparams})
+    // const options = {
+    //   headers : new HttpHeaders().set('Access-Control-Allow-Origin', '*'),
+    //   params : new HttpParams().set('api_key', this.apikey)
+    // };
+    return this.http.get<any>(this.baseUrl + this.urlSummonerName + url,
+      // options
+      {params: httparams}
+    )
       .pipe(
         map(data => {
           if (data && data.results) {
@@ -57,6 +63,7 @@ export class SummonerService {
       )
       ;
   }
+
   public getChampionMasteries(url: string = '', optionalParam?: HttpParams) {
 
     let httparams = new HttpParams()
@@ -81,6 +88,7 @@ export class SummonerService {
       )
       ;
   }
+
   public getLeague(url: string = '', optionalParam?: HttpParams) {
 
     let httparams = new HttpParams()
@@ -104,6 +112,7 @@ export class SummonerService {
       )
       ;
   }
+
   public getTft(url: string = '', optionalParam?: HttpParams) {
 
     let httparams = new HttpParams()

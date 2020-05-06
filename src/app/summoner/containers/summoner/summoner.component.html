@@ -5,21 +5,21 @@
             (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
   </form>
   <div *ngIf="summoner">
-    <div class="header-img row">
-      <img src="../../../../assets/lol/profileicon/{{summoner.profileIconId}}.png" alt="profile icon"
-           class="responsive icon-img col-md-3">
-      <p class="col-md-3">{{summoner.name}}</p>
-      <p class="col-md-3">Lvl {{summoner.summonerLevel}}</p>
+<!--    <div class="header-img row">-->
+<!--      <img src="../../../../assets/lol/profileicon/{{summoner.profileIconId}}.png" alt="profile icon"-->
+<!--           class="responsive icon-img col-md-3">-->
+<!--      <p class="col-md-3">{{summoner.name}}</p>-->
+<!--      <p class="col-md-3">Lvl {{summoner.summonerLevel}}</p>-->
 
-    </div>
+<!--    </div>-->
     <!--  <img src="../../../../assets/lol/splash/{{champions[0].championImage}}" alt="champion splash" class="responsive">-->
 
 
-    <div class="row league">
+    <div class="row league mt-3">
       <div class="col-md-4  col-xs-6"
            *ngFor="let league of leagues">
         <div class="text-center">
-          <h3>{{league.queueType}}</h3>
+          <h2>{{league.queueType}}</h2>
           <img src="../../../../assets/lol/ranked-emblems/{{league.tier}}.png"
                alt="{{league.tier}}" class="league-img">
           <div class="info text-center">
@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-4  col-xs-6" *ngFor="let tft of tfts">
         <div class="text-center">
-          <h3>{{tft.queueType}}</h3>
+          <h2>{{tft.queueType}}</h2>
           <img src="../../../../assets/lol/ranked-emblems/{{tft.tier}}.png"
                alt="{{tft.tier}}" class="league-img">
           <div class="info text-center">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <p>Most chances to get chest with :</p>
+    <h2 class="text-center mt-5">Most chances to get chest with :</h2>
     <div class="offset-md-3">
       <div class="md-form mt-2 mb-2 ml-2 col-md-1 custom-control-inline" *ngFor="let roleIcon of rolesIcons">
         <label class="form-check-label" for="inline{{roleIcon.viewValue}}"><img
@@ -65,6 +65,7 @@
         </div>
       </div>
     </div>
+    <h2 class="text-center mt-5">Filter :</h2>
     <div class="row">
       <div class="md-form mt-2 mb-2 col-lg-3 col-md-6">
         <label for="searchChamp" class="">Champion</label>
@@ -94,7 +95,7 @@
           </option>
         </select>
       </div>
-      <div class="md-form mt-2 mb-2 col-lg-1 col-md-3">
+      <div class="md-form mt-2 mb-2 col-lg-2 col-md-3">
         <label for="orderyByValue" class="">By</label>
         <select id="orderyByValue" class="browser-default custom-select" [(ngModel)]="propertyValue">
           <option value='asc'>Asc</option>
