@@ -5,38 +5,28 @@
             (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
   </form>
   <div *ngIf="summoner">
-<!--    <div class="header-img row">-->
-<!--      <img src="../../../../assets/lol/profileicon/{{summoner.profileIconId}}.png" alt="profile icon"-->
-<!--           class="responsive icon-img col-md-3">-->
-<!--      <p class="col-md-3">{{summoner.name}}</p>-->
-<!--      <p class="col-md-3">Lvl {{summoner.summonerLevel}}</p>-->
-
-<!--    </div>-->
-    <!--  <img src="../../../../assets/lol/splash/{{champions[0].championImage}}" alt="champion splash" class="responsive">-->
-
-
     <div class="row league mt-3">
-      <div class="col-md-4  col-xs-6"
+      <div class="col-md-4 col-xs-4"
            *ngFor="let league of leagues">
         <div class="text-center">
-          <h2>{{league.queueType}}</h2>
+          <h4>{{league.queueType}}</h4>
           <img src="../../../../assets/lol/ranked-emblems/{{league.tier}}.png"
                alt="{{league.tier}}" class="league-img">
           <div class="info text-center">
-            <h4>{{league.tier}} {{league.rank}}</h4>
+            <h6>{{league.tier}} {{league.rank}}</h6>
             <p>{{league.leaguePoints}} LP</p>
             <p><b>W / L :</b> {{league.wins}} / {{league.losses}}  </p>
           </div>
         </div>
       </div>
-      <div class="col-md-4  col-xs-6" *ngFor="let tft of tfts">
+      <div class="col-md-4 col-xs-4" *ngFor="let tft of tfts">
         <div class="text-center">
-          <h2>{{tft.queueType}}</h2>
+          <h4>{{tft.queueType}}</h4>
           <img src="../../../../assets/lol/ranked-emblems/{{tft.tier}}.png"
                alt="{{tft.tier}}" class="league-img">
           <div class="info text-center">
 
-            <h4>{{tft.tier}} {{tft.rank}}</h4>
+            <h6>{{tft.tier}} {{tft.rank}}</h6>
             <p>{{tft.leaguePoints}} LP</p>
             <p><b>W / L :</b> {{tft.wins}} / {{tft.losses}}</p>
           </div>
@@ -58,9 +48,9 @@
            *ngFor="let champion of champions | filter:roleIconValue |filter:'false' |slice:0:6">
         <div class="card-champ text-center">
           <img src="../../../../assets/lol/loading/{{champion.championImage}}"
-               alt="{{champion.championName}}" class="champ">
+               alt="{{champion.championName}}" class="champ champwithoutChest">
           <div class="info">
-            <h3>{{champion.championName}}</h3>
+            <h6>{{champion.championName}}</h6>
           </div>
         </div>
       </div>
@@ -106,15 +96,20 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-lg-2 col-xs-6"
+      <div class="col-md-4 col-lg-2 col-xs-6 mb-2"
            *ngFor="let champion of champions | filter:searchChamp |filter:chestValue|orderBy:propertyValue:property| filter:roleValue ">
-        <div class="card-champ text-center">
+        <div class="card-champ text-center" *ngIf="champion.chestGranted">
           <img src="../../../../assets/lol/loading/{{champion.championImage}}"
-               alt="{{champion.championName}}" class="champ">
+               alt="{{champion.championName}}" class="champ champChest">
           <div class="info">
-            <h3>{{champion.championName}}</h3>
-            <img *ngIf="champion.chestGranted" src="../../../../assets/images/chest-icon-bg.png" alt="icon"
-                 class="centered">
+            <h6>{{champion.championName}}</h6>
+          </div>
+        </div>
+        <div class="card-champ text-center" *ngIf="!champion.chestGranted">
+          <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+               alt="{{champion.championName}}" class="champ champwithoutChest">
+          <div class="info">
+            <h6>{{champion.championName}}</h6>
           </div>
         </div>
       </div>

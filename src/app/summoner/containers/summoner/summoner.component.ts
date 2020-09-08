@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Summoner} from '../../models/summoner';
 import {ChampionMasteries} from '../../models/champion-masteries';
 import * as data from '../../../../assets/lol/champions.json';
+import * as role from '../../../../assets/lol/roles.json';
 import {FormBuilder} from '@angular/forms';
 import {Leagues} from '../../models/leagues';
 import {Tft} from '../../models/tft';
@@ -20,6 +21,7 @@ export class SummonerComponent implements OnInit {
   tfts: Tft[];
   @Output() name: string;
   products: any = (data as any).default;
+  jsonRoles: any = (role as any).default;
   searchChamp;
   chestValue = '';
   roleValue = '';
@@ -28,8 +30,8 @@ export class SummonerComponent implements OnInit {
   propertyValue = 'asc';
   chestOptions = [
     {value: '', viewValue: 'All'},
-    {value: 'true', viewValue: 'Without'},
-    {value: 'false', viewValue: 'With'}
+    {value: 'true', viewValue: 'Earned'},
+    {value: 'false', viewValue: 'Not Earned'}
   ];
   orderyByOptions = [
     {value: 'championName', viewValue: 'Champion Name'},
@@ -82,7 +84,7 @@ export class SummonerComponent implements OnInit {
         champions.forEach(champion => {
           champion.championName = this.products.data[champion.championId].name;
           champion.championImage = this.products.data[champion.championId].id + '_0.jpg';
-          champion.championRoles = this.products.data[champion.championId].roles;
+          champion.championRoles = this.jsonRoles[champion.championId].roles;
         });
         this.champions = champions;
       });

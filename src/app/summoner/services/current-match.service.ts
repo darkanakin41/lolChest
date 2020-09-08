@@ -26,53 +26,11 @@ export class CurrentMatchService {
     this.urlCurrentGame = 'lol/spectator/v4/active-games/by-summoner/';
   }
 
-   getCurrentGame(url: string = '', optionalParam?: HttpParams) {
-    let httparams = new HttpParams()
-      .set('api_key', this.apikey);
-
-    if (optionalParam) {
-      optionalParam.keys().forEach((key) => {
-        httparams = httparams.set(key, optionalParam.get(key));
-      });
-    }
-
-
-    return this.http.get<any>(this.baseUrl + this.urlCurrentGame + url, {params: httparams})
-      .pipe(
-        map(data => {
-          if (data && data.results) {
-            return data.results;
-          } else {
-            return data;
-          }
-        })
-      );
-
+  public getCurrentGame(url: string = '', optionalParam?: HttpParams) {
+     return this.summonerService.getDataResult(url,  this.urlCurrentGame, optionalParam );
   }
 
   public getChampionMasteries(url: string = '', optionalParam?: HttpParams) {
-
-    let httparams = new HttpParams()
-      .set('api_key', this.apikey);
-
-    if (optionalParam) {
-      optionalParam.keys().forEach((key) => {
-        httparams = httparams.set(key, optionalParam.get(key));
-      });
-    }
-
-
-    // certains endpoints retourne directement la donnée tandis que d'autre sont paginer
-    return this.http.get<any>(this.baseUrl + this.urlChampionMateries + url, {params: httparams})
-      .pipe(
-        map(data => {
-          if (data && data.results) {
-            return data.results;
-          } else {
-            return data;
-          }
-        })
-      )
-      ;
+    return this.summonerService.getDataResult(url,  this.urlChampionMateries, optionalParam );
   }
 }

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apiEndpoint: 'https://euw1.api.riotgames.com/',
-  APIKEY: 'RGAPI-103fb7e7-79a6-4877-8e41-461acbb7bf36',
+  APIKEY: 'RGAPI-12d0e33d-bb66-4368-9cc3-7a75930b2415',
   firebase: {
     apiKey: 'AIzaSyDETmk8N6atipIaTfAQvivRBQbBezeAcQo',
     authDomain: 'lol-chest-app.firebaseapp.com',
