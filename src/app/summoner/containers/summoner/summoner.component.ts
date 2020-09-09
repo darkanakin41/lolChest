@@ -31,7 +31,7 @@ export class SummonerComponent implements OnInit {
   chestOptions = [
     {value: '', viewValue: 'All'},
     {value: 'true', viewValue: 'Earned'},
-    {value: 'false', viewValue: 'Not Earned'}
+    {value: 'false', viewValue: 'Not Yet'}
   ];
   orderyByOptions = [
     {value: 'championName', viewValue: 'Champion Name'},

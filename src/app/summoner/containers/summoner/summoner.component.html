@@ -1,11 +1,11 @@
 <div class="container summoner">
   <form class="row d-flex justify-content-center form-inline md-form mr-auto">
-    <input class="form-control mr-sm-2" type="text" #box placeholder="Nom du joueur" aria-label="Search">
+    <input class="form-control mr-sm-2 col-md-6" type="text" #box placeholder="Summoner" aria-label="Search">
     <button mdbBtn size="sm" outline="true" rounded="true" class="btn btn-outline-dark search"
             (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
   </form>
   <div *ngIf="summoner">
-    <div class="row league mt-3">
+    <!-- <div class="row league mt-3">
       <div class="col-md-4 col-xs-4"
            *ngFor="let league of leagues">
         <div class="text-center">
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <h2 class="text-center mt-5">Most chances to get chest with :</h2>
     <div class="offset-md-3">
       <div class="md-form mt-2 mb-2 ml-2 col-md-1 custom-control-inline" *ngFor="let roleIcon of rolesIcons">
@@ -98,9 +98,10 @@
     <div class="row">
       <div class="col-md-4 col-lg-2 col-xs-6 mb-2"
            *ngFor="let champion of champions | filter:searchChamp |filter:chestValue|orderBy:propertyValue:property| filter:roleValue ">
-        <div class="card-champ text-center" *ngIf="champion.chestGranted">
+        <div class="card-champ text-center granted" *ngIf="champion.chestGranted">
           <img src="../../../../assets/lol/loading/{{champion.championImage}}"
                alt="{{champion.championName}}" class="champ champChest">
+          <img alt="logo" class="front" src="../../../../assets/images/chest.png">
           <div class="info">
             <h6>{{champion.championName}}</h6>
           </div>
