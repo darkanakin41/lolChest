@@ -47,12 +47,12 @@ export class SummonerComponent implements OnInit {
     {value: '', viewValue: 'ALL'},
   ];
   rolesIcons = [
-    {value: 'TOP', viewValue: 'Position_Bronze-Top'},
-    {value: 'JUNGLE', viewValue: 'Position_Bronze-Jungle'},
-    {value: 'MID', viewValue: 'Position_Bronze-Mid'},
-    {value: 'ADC', viewValue: 'Position_Bronze-Bot'},
-    {value: 'SUPPORT', viewValue: 'Position_Bronze-Support'},
-    {value: '', viewValue: 'Position_All'},
+    {value: 'TOP', viewValue: 'top'},
+    {value: 'JUNGLE', viewValue: 'jungle'},
+    {value: 'MID', viewValue: 'mid'},
+    {value: 'ADC', viewValue: 'bot'},
+    {value: 'SUPPORT', viewValue: 'support'},
+    {value: '', viewValue: 'all'},
   ];
   regions = [
     {value: 'euw1', viewValue: 'EUW1'},
@@ -80,6 +80,7 @@ export class SummonerComponent implements OnInit {
   getSummonersChampions() {
     this.summonerService.getSummoner(this.value.replace(' ', '+')).subscribe(summoner => {
       this.summoner = summoner;
+      console.log(this.summoner);
       this.summonerService.getChampionMasteries(this.summoner.id).subscribe(champions => {
         champions.forEach(champion => {
           champion.championName = this.products.data[champion.championId].name;
