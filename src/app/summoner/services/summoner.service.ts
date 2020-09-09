@@ -10,6 +10,7 @@ const httpOptions = {
     'content-type': 'application/json'
   })
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +22,6 @@ export class SummonerService {
   urlChampionMateries: string;
   urlLeague: string;
   urlTft: string;
-  leagueUrl: string;
 
   constructor(public http: HttpClient) {
 
@@ -34,87 +34,30 @@ export class SummonerService {
   }
 
   public getSummoner(url: string = '', optionalParam?: HttpParams) {
-
-    let httparams = new HttpParams()
-      .set('api_key', this.apikey);
-
-    if (optionalParam) {
-      optionalParam.keys().forEach((key) => {
-        httparams = httparams.set(key, optionalParam.get(key));
-      });
-    }
-
-
-    return this.http.get<any>(this.baseUrl + this.urlSummonerName + url, {params: httparams})
-      .pipe(
-        map(data => {
-          if (data && data.results) {
-            return data.results;
-          } else {
-            return data;
-          }
-        })
-      )
-      ;
+    return this.getDataResult(url,  this.urlSummonerName, optionalParam );
   }
+
   public getChampionMasteries(url: string = '', optionalParam?: HttpParams) {
-
-    let httparams = new HttpParams()
-      .set('api_key', this.apikey);
-
-    if (optionalParam) {
-      optionalParam.keys().forEach((key) => {
-        httparams = httparams.set(key, optionalParam.get(key));
-      });
-    }
-
-
-    return this.http.get<any>(this.baseUrl + this.urlChampionMateries + url, {params: httparams})
-      .pipe(
-        map(data => {
-          if (data && data.results) {
-            return data.results;
-          } else {
-            return data;
-          }
-        })
-      )
-      ;
+    return this.getDataResult(url,  this.urlChampionMateries, optionalParam );
   }
+
   public getLeague(url: string = '', optionalParam?: HttpParams) {
-
-    let httparams = new HttpParams()
-      .set('api_key', this.apikey);
-
-    if (optionalParam) {
-      optionalParam.keys().forEach((key) => {
-        httparams = httparams.set(key, optionalParam.get(key));
-      });
-    }
-
-    return this.http.get<any>(this.baseUrl + this.urlLeague + url, {params: httparams})
-      .pipe(
-        map(data => {
-          if (data && data.results) {
-            return data.results;
-          } else {
-            return data;
-          }
-        })
-      )
-      ;
+    return this.getDataResult(url,  this.urlLeague, optionalParam );
   }
+
   public getTft(url: string = '', optionalParam?: HttpParams) {
+    return this.getDataResult(url,  this.urlTft, optionalParam );
+  }
 
+  public getDataResult(url: string = '', lolUrl: string = '', optionalParam?: HttpParams) {
     let httparams = new HttpParams()
       .set('api_key', this.apikey);
-
     if (optionalParam) {
       optionalParam.keys().forEach((key) => {
         httparams = httparams.set(key, optionalParam.get(key));
       });
     }
-    return this.http.get<any>(this.baseUrl + this.urlTft + url, {params: httparams})
+    return this.http.get<any>(this.baseUrl + lolUrl + url, {params: httparams})
       .pipe(
         map(data => {
           if (data && data.results) {
@@ -126,5 +69,4 @@ export class SummonerService {
       )
       ;
   }
-
 }
