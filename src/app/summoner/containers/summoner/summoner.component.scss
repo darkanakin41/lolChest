@@ -38,6 +38,7 @@
 .champ {
   object-fit: cover;
   width: 170px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .champChest{
   filter: grayscale(1);
@@ -54,4 +55,8 @@
 }
 .granted {
   position: absolute;
+}
+.position-icon{
+  max-width: 80px;
+  height: auto;
 }
