@@ -8,6 +8,9 @@ import * as role from '../../../../assets/lol/roles.json';
 import {FormBuilder} from '@angular/forms';
 import {Leagues} from '../../models/leagues';
 import {Tft} from '../../models/tft';
+import {ChampionService} from '../../services/champion.service';
+import { CdragonService } from '../../services/cdragron.service';
+
 
 @Component({
   selector: 'app-summoner',
@@ -27,7 +30,7 @@ export class SummonerComponent implements OnInit {
   roleValue = '';
   roleIconValue = '';
   property = 'championName';
-  propertyValue = 'asc';
+  propertyValue = '';
   chestOptions = [
     {value: '', viewValue: 'All'},
     {value: 'true', viewValue: 'Earned'},
@@ -70,7 +73,9 @@ export class SummonerComponent implements OnInit {
   constructor(
     private summonerService: SummonerService,
     private http: HttpClient,
-    private fb: FormBuilder
+    private championService: ChampionService,
+    private fb: FormBuilder,
+    private cdragon: CdragonService
   ) {
   }
 
@@ -83,9 +88,13 @@ export class SummonerComponent implements OnInit {
       console.log(this.summoner);
       this.summonerService.getChampionMasteries(this.summoner.id).subscribe(champions => {
         champions.forEach(champion => {
-          champion.championName = this.products.data[champion.championId].name;
-          champion.championImage = this.products.data[champion.championId].id + '_0.jpg';
-          champion.championRoles = this.jsonRoles[champion.championId].roles;
+             this.cdragon.getChampionData(champion.championId).subscribe(champData=> {
+              console.log(champData)
+              champion.championName = champData.name;
+             });
+            champion.championImage = this.cdragon.getPortrait(champion.championId);
+            champion.championRoles = this.jsonRoles[champion.championId].roles;
+
         });
         this.champions = champions;
       });
