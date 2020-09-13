@@ -47,7 +47,7 @@
       <div class="col-md-4 col-lg-2 col-xs-6"
            *ngFor="let champion of champions | filter:roleIconValue |filter:'false' |slice:0:6">
         <div class="card-champ text-center">
-          <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+          <img src="{{champion.championImage}}"
                alt="{{champion.championName}}" class="champ champwithoutChest">
           <div class="info">
             <h6>{{champion.championName}}</h6>
@@ -99,7 +99,7 @@
       <div class="col-md-4 col-lg-2 col-xs-6 mb-2"
            *ngFor="let champion of champions | filter:searchChamp |filter:chestValue|orderBy:propertyValue:property| filter:roleValue ">
         <div class="card-champ text-center granted" *ngIf="champion.chestGranted">
-          <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+          <img src="{{champion.championImage}}"
                alt="{{champion.championName}}" class="champ champChest">
           <img alt="logo" class="front" src="../../../../assets/images/chest.png">
           <div class="info">
@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="card-champ text-center" *ngIf="!champion.chestGranted">
-          <img src="../../../../assets/lol/loading/{{champion.championImage}}"
+          <img src="{{champion.championImage}}"
                alt="{{champion.championName}}" class="champ champwithoutChest">
           <div class="info">
             <h6>{{champion.championName}}</h6>
