@@ -58,16 +58,16 @@ export class SummonerComponent implements OnInit {
     {value: '', viewValue: 'all'},
   ];
   regions = [
-    {value: 'euw1', viewValue: 'EUW1'},
-    {value: 'br1', viewValue: 'BR1'},
-    {value: 'eun1', viewValue: 'EUN1'},
-    {value: 'jp1', viewValue: 'JP1'},
+    {value: 'euw1', viewValue: 'EUW-1'},
+    {value: 'br1', viewValue: 'BR-1'},
+    {value: 'eun1', viewValue: 'EUN-1'},
+    {value: 'jp1', viewValue: 'JP-1'},
     {value: 'kr', viewValue: 'KR'},
-    {value: 'la1', viewValue: 'LA1'},
-    {value: 'la2', viewValue: 'LA2'},
-    {value: 'oc1', viewValue: 'OC1'},
+    {value: 'la1', viewValue: 'LA-1'},
+    {value: 'la2', viewValue: 'LA-2'},
+    {value: 'oc1', viewValue: 'OC-1'},
     {value: 'ru', viewValue: 'RU'},
-    {value: 'tr1', viewValue: 'TR1'},
+    {value: 'tr1', viewValue: 'TR-1'},
   ];
 
   constructor(
@@ -82,45 +82,44 @@ export class SummonerComponent implements OnInit {
   region = 'euw1';
   value = '';
 
-  getSummonersChampions() {
-    this.summonerService.getSummoner(this.value.replace(' ', '+')).subscribe(summoner => {
+  getSummonersChampions(region = 'euw1') {
+    this.summonerService.getSummoner(this.region, this.value.replace(' ', '+')).subscribe(summoner => {
       this.summoner = summoner;
-      console.log(this.summoner);
-      this.summonerService.getChampionMasteries(this.summoner.id).subscribe(champions => {
+
+      this.summonerService.getChampionMasteries(this.region, this.summoner.id).subscribe(champions => {
         champions.forEach(champion => {
              this.cdragon.getChampionData(champion.championId).subscribe(champData=> {
-              console.log(champData)
               champion.championName = champData.name;
              });
+             console.log(champion);
             champion.championImage = this.cdragon.getPortrait(champion.championId);
             champion.championRoles = this.jsonRoles[champion.championId].roles;
-
         });
         this.champions = champions;
       });
-      this.summonerService.getLeague(this.summoner.id).subscribe(leagues => {
-        leagues.forEach(league => {
-          league.queueType = league.queueType.replace('RANKED_', '');
-          league.queueType = league.queueType.replace('_5x5', '/DUO');
-          league.queueType = league.queueType.replace('_SR', '');
-        });
-        this.leagues = leagues;
-      });
-      this.summonerService.getTft(this.summoner.id).subscribe(tfts => {
-        tfts.forEach(tft => {
-          tft.queueType = tft.queueType.replace('RANKED_', '');
-        });
-        this.tfts = tfts;
-      });
+//      this.summonerService.getLeague(this.summoner.id).subscribe(leagues => {
+//        leagues.forEach(league => {
+//          league.queueType = league.queueType.replace('RANKED_', '');
+//          league.queueType = league.queueType.replace('_5x5', '/DUO');
+//          league.queueType = league.queueType.replace('_SR', '');
+//       });
+//        this.leagues = leagues;
+//      });
+//      this.summonerService.getTft(this.summoner.id).subscribe(tfts => {
+//        tfts.forEach(tft => {
+//          tft.queueType = tft.queueType.replace('RANKED_', '');
+//       });
+//        this.tfts = tfts;
+//      });
     });
   }
 
   ngOnInit() {
-    this.getSummonersChampions();
+   // this.getSummonersChampions();
   }
 
-  onEnter(value: string) {
+  onEnter(value: string, region: string) {
     this.value = value;
-    this.getSummonersChampions();
+    this.getSummonersChampions(region);
   }
 }

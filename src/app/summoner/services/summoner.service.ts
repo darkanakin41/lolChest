@@ -15,17 +15,19 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SummonerService {
-
+  headers;
   apikey: string;
   baseUrl: string;
   urlSummonerName: string;
   urlChampionMateries: string;
   urlLeague: string;
   urlTft: string;
-
+  https : string;
   constructor(public http: HttpClient) {
-
+    this.headers = new HttpHeaders();
+    this.headers.append('Access-Control-Allow-Headers', '*');
     this.apikey = environment.APIKEY;
+    this.https = environment.https;
     this.baseUrl = environment.apiEndpoint;
     this.urlSummonerName = 'lol/summoner/v4/summoners/by-name/';
     this.urlChampionMateries = 'lol/champion-mastery/v4/champion-masteries/by-summoner/';
@@ -33,23 +35,23 @@ export class SummonerService {
     this.urlTft = 'tft/league/v1/entries/by-summoner/';
   }
 
-  public getSummoner(url: string = '', optionalParam?: HttpParams) {
-    return this.getDataResult(url,  this.urlSummonerName, optionalParam );
+  public getSummoner(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+    return this.getDataResult(region, url,  this.urlSummonerName, optionalParam );
   }
 
-  public getChampionMasteries(url: string = '', optionalParam?: HttpParams) {
-    return this.getDataResult(url,  this.urlChampionMateries, optionalParam );
+  public getChampionMasteries(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+    return this.getDataResult(region, url,  this.urlChampionMateries, optionalParam );
   }
 
-  public getLeague(url: string = '', optionalParam?: HttpParams) {
-    return this.getDataResult(url,  this.urlLeague, optionalParam );
+  public getLeague(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+    return this.getDataResult(region, url,  this.urlLeague, optionalParam );
   }
 
-  public getTft(url: string = '', optionalParam?: HttpParams) {
-    return this.getDataResult(url,  this.urlTft, optionalParam );
+  public getTft(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+    return this.getDataResult(region, url,  this.urlTft, optionalParam );
   }
 
-  public getDataResult(url: string = '', lolUrl: string = '', optionalParam?: HttpParams) {
+  public getDataResult(region = 'euw1', url: string = '', lolUrl: string = '', optionalParam?: HttpParams) {
     let httparams = new HttpParams()
       .set('api_key', this.apikey);
     if (optionalParam) {
@@ -57,7 +59,7 @@ export class SummonerService {
         httparams = httparams.set(key, optionalParam.get(key));
       });
     }
-    return this.http.get<any>(this.baseUrl + lolUrl + url, {params: httparams})
+    return this.http.get<any>(this.https + region + this.baseUrl + lolUrl + url, {headers :this.headers, params: httparams})
       .pipe(
         map(data => {
           if (data && data.results) {
@@ -66,7 +68,6 @@ export class SummonerService {
             return data;
           }
         })
-      )
-      ;
+      );
   }
 }

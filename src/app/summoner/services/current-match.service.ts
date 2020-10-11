@@ -26,11 +26,11 @@ export class CurrentMatchService {
     this.urlCurrentGame = 'lol/spectator/v4/active-games/by-summoner/';
   }
 
-  public getCurrentGame(url: string = '', optionalParam?: HttpParams) {
-     return this.summonerService.getDataResult(url,  this.urlCurrentGame, optionalParam );
+  public getCurrentGame(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+     return this.summonerService.getDataResult(region,url,  this.urlCurrentGame, optionalParam );
   }
 
-  public getChampionMasteries(url: string = '', optionalParam?: HttpParams) {
-    return this.summonerService.getDataResult(url,  this.urlChampionMateries, optionalParam );
+  public getChampionMasteries(region = 'euw1', url: string = '', optionalParam?: HttpParams) {
+    return this.summonerService.getDataResult(region, url,  this.urlChampionMateries, optionalParam );
   }
 }

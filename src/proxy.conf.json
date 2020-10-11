@@ -1,6 +1,0 @@
-{
-  "/api": {
-    "target": "https://euw1.api.riotgames.com",
-    "secure": false
-  }
-}
