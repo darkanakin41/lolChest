@@ -1,6 +1,12 @@
+import {Response} from "express";
+import {Request} from "firebase-functions/lib/providers/https";
+
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const express = require('express');
-const app = express();
-const cors = require('cors');
-app.use(cors({origin: '*'}));
+const cors = require('cors')({origin: true});
+
+exports.cors = functions.https.onRequest((request: Request, response: Response) => {
+  cors(request, response, () => {
+    response.set('Access-Control-Allow-Origin', '*');
+    response.set('Access-Control-Allow-Credentials', 'true');
+  })
+});

@@ -9,7 +9,7 @@ import {FormBuilder} from '@angular/forms';
 import {Leagues} from '../../models/leagues';
 import {Tft} from '../../models/tft';
 import {ChampionService} from '../../services/champion.service';
-import { CdragonService } from '../../services/cdragron.service';
+import {CdragonService} from '../../services/cdragron.service';
 
 
 @Component({
@@ -88,12 +88,12 @@ export class SummonerComponent implements OnInit {
 
       this.summonerService.getChampionMasteries(this.region, this.summoner.id).subscribe(champions => {
         champions.forEach(champion => {
-             this.cdragon.getChampionData(champion.championId).subscribe(champData=> {
-              champion.championName = champData.name;
-             });
-             console.log(champion);
-            champion.championImage = this.cdragon.getPortrait(champion.championId);
-            champion.championRoles = this.jsonRoles[champion.championId].roles;
+          this.cdragon.getChampionData(champion.championId).subscribe(champData => {
+            champion.championName = champData.name;
+          });
+          console.log(champion);
+          champion.championImage = this.cdragon.getPortrait(champion.championId);
+          champion.championRoles = this.jsonRoles[champion.championId].roles;
         });
         this.champions = champions;
       });
@@ -115,11 +115,11 @@ export class SummonerComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.getSummonersChampions();
+    // this.getSummonersChampions();
   }
 
-  onEnter(value: string, region: string) {
+  onEnter(value: string) {
     this.value = value;
-    this.getSummonersChampions(region);
+    this.getSummonersChampions(this.region);
   }
 }

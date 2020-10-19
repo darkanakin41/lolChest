@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
 
+## Install
+
+After pulling sources run `npm install`
+Copy `/src/environments/environment.ts.dist` to `/src/environments/environment.ts`
+
+##Firebase
+
+This project is host in Firebase contact project's owner to use it
+
+## Riot Api Key
+
+This project use Riot's Api contact project's owner to use it
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

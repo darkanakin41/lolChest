@@ -6,7 +6,7 @@ import {cors} from 'cors';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': 'https://euw1.api.riotgames.com',
+    'Access-Control-Allow-Origin': '*',
     'content-type': 'application/json'
   })
 };
@@ -22,7 +22,7 @@ export class SummonerService {
   urlChampionMateries: string;
   urlLeague: string;
   urlTft: string;
-  https : string;
+  https: string;
   constructor(public http: HttpClient) {
     this.headers = new HttpHeaders();
     this.headers.append('Access-Control-Allow-Headers', '*');
@@ -59,7 +59,7 @@ export class SummonerService {
         httparams = httparams.set(key, optionalParam.get(key));
       });
     }
-    return this.http.get<any>(this.https + region + this.baseUrl + lolUrl + url, {headers :this.headers, params: httparams})
+    return this.http.get<any>(this.https + region + this.baseUrl + lolUrl + url, {headers : this.headers, params: httparams})
       .pipe(
         map(data => {
           if (data && data.results) {

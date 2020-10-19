@@ -1,22 +1,9 @@
 <div class="container summoner">
-
-
-  <form class="row d-flex justify-content-center form-inline md-form mr-auto ">
-    <div class="input-group">
-    <div class="md-form input-group-prepend">
-      <select id="regions" class="browser-default custom-select" [(ngModel)]="property" placeholder="Region">
-        <option *ngFor="let region of regions" [value]="region.value">
-          {{region.viewValue}}
-        </option>
-      </select>
-    </div>
-    <input class="form-control" type="text" #box placeholder="Summoner" aria-label="Search">
+  <form class="row d-flex justify-content-center form-inline md-form mr-auto">
+    <input class="form-control mr-sm-2 col-md-6" type="text" #box placeholder="Summoner" aria-label="Search">
     <button mdbBtn size="sm" outline="true" rounded="true" class="btn btn-outline-dark search"
-            (click)="onEnter(box.value, region.value)"><i class="fas fa-search"></i></button>
-    </div>
-
+            (click)="onEnter(box.value)"><i class="fas fa-search"></i></button>
   </form>
-
   <div *ngIf="summoner">
     <!-- <div class="row league mt-3">
       <div class="col-md-4 col-xs-4"
